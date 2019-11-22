@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<link href="https://fonts.googleapis.com/css?family=Rock+Salt&display=swap" rel="stylesheet">
+
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.min.js"></script>
+
+
+	<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="../node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+	<title>Books</title>
+
+
+	<style id="card-book">
+		.card.card-book {
+			/*width: 18rem;*/
+			margin: 0 auto 0 auto;
+		}
+
+		.card.card-book .card-body>.card-text.card-book-pub {
+			font-size: 75%;
+		}
+
+		.card.card-book .card-body>.card-title,
+		.card.card-book .card-body>.card-subtitle {
+			text-transform: capitalize;
+		}
+
+		.card.card-book .card-body>.card-title sup {
+			top: -1.2em;
+		}
+
+		.card.card-book .card-body>.card-title sub {
+			bottom: -.5em;
+		}
+
+		.card.card-book .card-body>.card-title i.fa {
+			font-size: 90%;
+		}
+
+		.card.card-book .card-body>.card-text.card-book-pub,
+		.card.card-book .card-body>.card-text.card-book-replies {
+			font-weight: 300;
+		}
+
+		.card.card-book .card-body>.card-text.card-book-replies span {
+			font-weight: 500;
+		}
+
+		.card-columns {
+			-webkit-column-count: 1;
+			-moz-column-count: 1;
+			column-count: 1;
+		}
+
+		@media (min-width: 576px) {
+			.card-columns {
+				-webkit-column-count: 2;
+				-moz-column-count: 2;
+				column-count: 2;
+			}
+		}
+
+		@media (min-width: 768px) {
+			.card-columns {
+				-webkit-column-count: 3;
+				-moz-column-count: 3;
+				column-count: 3;
+			}
+		}
+
+		@media (min-width: 992px) {
+			.card-columns {
+				-webkit-column-count: 4;
+				-moz-column-count: 4;
+				column-count: 4;
+			}
+		}
+
+		@media (min-width: 1200px) {
+			.card-columns {
+				-webkit-column-count: 5;
+				-moz-column-count: 5;
+				column-count: 5;
+			}
+		}
+	</style>
+	<style id="header">
+		.navbar {
+			background-color: #1D1D1B;
+		}
+
+
+		.navbar .navbar-brand.logo,
+		.jumbotron .navbar-offset {
+			margin: 0 auto;
+			color: #FDFDFB;
+			text-transform: capitalize;
+			font-family: 'Rock Salt', cursive;
+			font-size: 2rem;
+		}
+
+		.jumbotron img {
+			height: 22vh !important;
+		}
+
+
+		.jumbotron {
+			color: white;
+			background-color: #1D1D1B;
+			padding: 0;
+			margin-bottom: 0;
+		}
+
+		.jumbotron .navbar-offset {
+			visibility: hidden;
+			padding-bottom: 1.1rem;
+		}
+
+		/****/
+		header .nav {
+			background: rgb(0, 123, 255);
+			background: -moz-linear-gradient(45deg, rgba(0, 123, 255, 1) 40%, rgba(0, 186, 255, 1) 100%);
+			background: -webkit-linear-gradient(45deg, rgba(0, 123, 255, 1) 40%, rgba(0, 186, 255, 1) 100%);
+			background: linear-gradient(45deg, rgba(0, 123, 255, 1) 40%, rgba(0, 186, 255, 1) 100%);
+			border-radius: .25rem;
+			text-align: center;
+			min-height: 10vh;
+			width: 75vw;
+			margin: 0 auto;
+			padding: 1em;
+			align-items: center;
+			justify-content: space-around;
+		}
+
+		header .nav * {
+			color: white !important;
+			text-transform: uppercase;
+		}
+
+		header .nav .nav-item.active {
+			background-color: rgba(255, 255, 255, .3);
+		}
+
+		header {
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			height: auto;
+		}
+
+		header .bg-filler {
+			background-color: #1D1D1B;
+			width: 100%;
+			height: 8vh;
+			margin-bottom: -8vh;
+		}
+
+		body {
+			z-index: 1;
+		}
+
+		header,
+		.navbar.navbar-fixed {
+			z-index: 999 !important;
+		}
+	</style>
+
+
+	<script id="card-template" type="text/x-handlebars-template">
+		<div class="card card-book shadow-sm mb-3		bg-white">
+			<div class="card-body">
+				<p class="card-text card-book-pub 		text-muted">
+					{{publicationDate}}
+				</p>
+				<p class="card-title">
+					<sup><i class="fa fa-quote-left 		text-primary"></i></sup>
+					<span class="h2">{{title}}</span>
+					<sub><i class="fa fa-quote-right 		text-primary"></i></sub>
+				</p>
+				<h5 class="card-subtitle 		mb-5 text-muted">
+					{{author}}
+				</h5>
+				<hr />
+				<h6 class="card-text card-book-replies 		text-muted mb-0">Copie rimanenti
+					<span class="text-dark">{{replies}}</span>
+				</h6>
+			</div>
+		</div>
+	</script>
+
+
+
+</head>
+
+<body style="background-color: #f0f0f0 ;">
+	<!-- NAVBAR -->
+	<nav class="navbar fixed-top pb-3">
+		<a class="navbar-brand logo" href="#">
+			pecora elettrica
+		</a>
+	</nav>
+	<!-- FIRST IMPACT CONTENT -->
+	<div class="jumbotron jumbotron-fluid shadow-lg">
+		<div class="container">
+			<div class="navbar-offset">hidden</div>
+			<div class="text-center">
+				<img class="mx-auto" src="../assets/logo.png" />
+			</div>
+		</div>
+	</div>
+
+	<header>
+
+		<div class="bg-filler shadow-lg"></div>
+		<div class="nav nav-pills shadow-lg" id="nav-tab" role="tablist">
+			<a class="flex-sm-fill nav-item nav-link" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+				aria-controls="nav-home" aria-selected="true">
+				home
+			</a>
+			<a class="flex-sm-fill nav-item nav-link active" id="nav-contact-tab" data-toggle="tab" href="#nav-contact"
+				role="tab" aria-controls="nav-contact" aria-selected="false">
+				search
+			</a>
+			<a class="flex-sm-fill nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+				aria-controls="nav-profile" aria-selected="false">
+				profile
+			</a>
+		</div>
+
+	</header>
+
+
+	<!-- BOOK GRID-->
+	<div class="container pt-5">
+		<div class="tab-content" id="nav-tabContent">
+			<div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+				home
+			</div>
+			<div class="tab-pane fade show active" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+				<!-- SEARCH FORM-->
+				<form class="form-inline w-75 mx-auto">
+					<div class="input-group w-100 mb-2  shadow">
+						<div class="input-group-prepend">
+							<div class="input-group-text"><i class="fa fa-search"></i></div>
+						</div>
+						<input type="text" class="form-control" placeholder="Search">
+						<div class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button">Go!</button>
+						</div>
+					</div>
+				</form>
+				<hr>
+				<!--SEARCH RESULT CONTAINER-->
+				<div class="card-columns" id="c-deck">
+
+				</div>
+			</div>
+
+			<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+
+			</div>
+		</div>
+		<!---->
+
+	</div>
+
+
+	<script type="text/javascript">
+		(() => {
+			const header = $('header');
+			const logoHeight = $('nav.navbar.fixed-top').outerHeight();
+			const headerOffset = $('.jumbotron').outerHeight() - logoHeight;
+
+			const w = $(window);
+			w.scroll(function () {
+				if (w.scrollTop() >= headerOffset) {
+
+					console.log(w.scrollTop())
+					header.css({ position: 'fixed', top: logoHeight });
+				} else {
+					header.attr('style', '');
+				}
+			})
+		})();
+
+
+
+
+
+		const template = $('#card-template').html();
+		const CardBookTemplate = Handlebars.compile(template);
+
+
+		var books = [
+			{
+				"title": "Quo rerum sed reprehenderit.",
+				"author": "Dr. Carlie Heller",
+				"publicationDate": "1989-07-08",
+				"isbn": "441d8a1a2d21df26c",
+				"pages_no": 345,
+				"replies": 4
+			},
+			{
+				"title": "Molestias ut numquam maxime aut.",
+				"author": "Mrs. Lizeth Batz",
+				"publicationDate": "2018-03-23",
+				"isbn": "9a375356b99909054",
+				"pages_no": 394,
+				"replies": 4
+			},
+			{
+				"title": "Magnam quod aut in.",
+				"author": "Dr. Dan Ledner II",
+				"publicationDate": "1992-02-11",
+				"isbn": "3e00b2b75582c98a2",
+				"pages_no": 554,
+				"replies": 4
+			},
+			{
+				"title": "Est minima harum sed.",
+				"author": "Kendra Davis",
+				"publicationDate": "1987-07-28",
+				"isbn": "e8cc4f7638c0f5edd",
+				"pages_no": 115,
+				"replies": 4
+			},
+			{
+				"title": "Distinctio autem distinctio.",
+				"author": "Polly Effertz",
+				"publicationDate": "1982-05-28",
+				"isbn": "493939115f268c19c",
+				"pages_no": 1362,
+				"replies": 4
+			},
+			{
+				"title": "Delectus quo dolor enim molestiae.",
+				"author": "Aubree Kessler",
+				"publicationDate": "1992-12-02",
+				"isbn": "9f8e513ddaea03c4e",
+				"pages_no": 2793,
+				"replies": 4
+			},
+			{
+				"title": "Similique excepturi odio id distinctio.",
+				"author": "Zetta Beer",
+				"publicationDate": "2013-07-21",
+				"isbn": "0559910017ec93d8a",
+				"pages_no": 296,
+				"replies": 4
+			},
+			{
+				"title": "Animi vitae aut repellendus.",
+				"author": "Johnnie Fahey",
+				"publicationDate": "2012-09-26",
+				"isbn": "485dfb048013e231f",
+				"pages_no": 1695,
+				"replies": 4
+			},
+			{
+				"title": "Ea eos quia doloremque tenetur quo.",
+				"author": "Mona Collins",
+				"publicationDate": "1987-09-21",
+				"isbn": "18657716e287560ad",
+				"pages_no": 730,
+				"replies": 4
+			},
+			{
+				"title": "Iure sunt dolorum eos explicabo ab.",
+				"author": "Jailyn Daniel",
+				"publicationDate": "2016-04-04",
+				"isbn": "98ec541cfa60f0798",
+				"pages_no": 1800,
+				"replies": 4
+			}
+		];
+
+		const colorPairs = [
+			{ bg: "#769ECB", text: "#f0f0f0" },
+			{ bg: "#9DBAD5", text: "#ffffff" },
+			{ bg: "#FAF3DD", text: "#000000" },
+			{ bg: "#C8D6B9", text: "#000000" },
+			{ bg: "#8FC1A9", text: "#ffffff" },
+			{ bg: "#7CAA98", text: "#ffffff" }
+		];
+
+		const months = [null, "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
+		function myDateFormat(d) {
+			return `${d.getDay()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+		}
+
+		function bookToHtml(book) {
+			book.publicationDate = book.publicationDate &&
+				myDateFormat(new Date(book.publicationDate));
+			//console.log(book.publicationDate)
+			return CardBookTemplate(book);
+		}
+
+
+		var result = books.map((b, index) => {
+			var result = '';
+			console.log(index);
+			//if (index % 2 === 0 && index !== 0)
+			//result = result.concat('<div class="w-100 d-none d-sm-block d-md-none"><!-- wrap every 2 on sm--></div>');
+
+			return result.concat(bookToHtml(b));
+		}).join(' ');
+
+		$('#c-deck').html(result);
+	</script>
+</body>
+
+</html>
