@@ -1,1 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
+.main-colors {
+  background-color: #fdfdfb;
+  color: #1d1d1b;
+}
+
+.main-colors-invert {
+  background-color: #1d1d1b;
+  color: #fdfdfb;
+}
+
+body {
+  font-family: 'Lato', sans-serif !important;
+  background-color: #1d1d1b !important;
+  color: #fdfdfb !important;
+}
+
+.text-heading {
+  font-family: 'Roboto Slab', serif;
+}
+
+.text-heading > sup {
+  top: -1em;
+  padding-right: .5rem;
+}
+
+.text-heading > sub {
+  bottom: -.3em;
+  padding-left: .5rem;
+}
+
+.text-heading .fa {
+  font-size: 90%;
+}

@@ -1,0 +1,60 @@
+
+
+.jumbotron {
+  background-color: unset;
+  margin-bottom: 0;
+}
+
+.jumbotron .logo {
+  text-transform: capitalize;
+  font-family: 'Rock Salt', cursive  !important;
+}
+
+.jumbotron img {
+  height: 15vh;
+}
+
+ #content-wrapper {
+   padding: 1rem;
+   min-height: 30vh;
+   background-color: #eee;
+   margin-bottom: 4rem;
+   margin-top: 100vh;
+ }
+
+ footer {
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   width: 100vw;
+   padding :2rem;
+   color:gray;
+ }
+
+ footer > p {
+   font-size: 0.8rem;
+   height: 1rem;
+   line-height: 1rem;
+   margin:0;
+ }
+
+header, footer,
+header> * , footer> * {
+  z-index: 1 !important;
+}
+#content-wrapper > * {
+  z-index: 99 !important;
+}
+
+
+/* TODO */
+
+#content-wrapper {
+  min-height: 100vh;
+  margin: 0;
+}
+
+footer, footer > *{
+  display: none;
+}
+

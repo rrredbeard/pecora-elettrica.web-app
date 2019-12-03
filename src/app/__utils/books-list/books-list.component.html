@@ -1,0 +1,24 @@
+<ng-container *ngIf="books.length !== 0; else EmptyBooks">
+  <div *ngFor='let book of books' class="card card-book shadow-sm mb-3		bg-white">
+    <div class="card-body">
+      <p class="card-text card-book-pub 		text-muted">
+        {{ book.publication_date | date:'fullDate' }}
+      </p>
+      <p class="card-title text-heading">
+        <sup><i class="fa fa-quote-left 		text-primary"></i></sup>
+        <span class="h2">{{ book.title }}</span>
+        <sub><i class="fa fa-quote-right 		text-primary"></i></sub>
+      </p>
+      <h5 class="card-subtitle 		mb-5 text-muted">
+        {{ book.author }}
+      </h5>
+      <hr />
+      <h6 class="card-text card-book-replies 		text-muted mb-0">Copie rimanenti
+        <span class="text-dark">{{ book.replies }}</span>
+      </h6>
+    </div>
+  </div>
+</ng-container>
+<ng-template #EmptyBooks>
+  <p>EmptyBooks</p>
+</ng-template>

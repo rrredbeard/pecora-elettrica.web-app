@@ -1,0 +1,23 @@
+.card.card-book {
+  /*width: 18rem;*/
+  margin: 0 auto 0 auto;
+}
+
+.card.card-book .card-body>.card-text.card-book-pub {
+  font-size: 75%;
+}
+
+.card.card-book .card-body>.card-title,
+.card.card-book .card-body>.card-subtitle {
+  text-transform: capitalize;
+}
+
+
+.card.card-book .card-body>.card-text.card-book-pub,
+.card.card-book .card-body>.card-text.card-book-replies {
+  font-weight: 300;
+}
+
+.card.card-book .card-body>.card-text.card-book-replies span {
+  font-weight: 500;
+}
